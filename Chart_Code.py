@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(layout="wide")
+
 @st.cache(allow_output_mutation=True)
 def Truedata_login(hash_funcs = {TD : id}):
 	td_obj = TD('wssand015', 'anand015', live_port=None)
