@@ -108,10 +108,9 @@ for i in range((Sell_Dist)[0], (Sell_Dist)[1]+1, 1):
 	Final_DF["CE_SELL"] = "CE  (" + str(round(ce_sell_entry)).rjust(5) + " |" + ce_sell['o'].round().astype(int).astype(str).str.rjust(5) + " )"
 	Final_DF["PE_SELL"] = "PE  (" + str(round(pe_sell_entry)).rjust(5) + " |" + pe_sell['o'].round().astype(int).astype(str).str.rjust(5) + " )"
 	Final_DF["FINAL"] = Final_DF["CE_SELL"] + "    |    " + Final_DF["PE_SELL"]
-
-if Final_DF['Change' + str(i)].max() > Max_profit:
 	
-	Max_profit = Final_DF['Change' + str(i)].max()
+	if Final_DF['Change' + str(i)].max() > Max_profit:
+		Max_profit = Final_DF['Change' + str(i)].max()
 	
 	fig.add_trace(go.Scatter(x=Final_DF.index, y=Final_DF["Change"+str(i)], legendgrouptitle_text = (str(int(i/5)) + "Group"), legendgroup= int(i/5), customdata = Final_DF["FINAL"], name = str(i).rjust(4), hovertemplate='Profit: (%{y:5d} )   |   %{customdata}'))#, visible='legendonly'))
 	
