@@ -126,7 +126,7 @@ Indexcsv2["Entry_line"] = Index_Entry
 fig.add_trace(go.Scatter(x=Indexcsv2.index, y = Indexcsv2["Entry_line"], line=dict(color='red'), line_width=0.5, name = "Index Entry", yaxis="y2", showlegend = False))
 
 Final_DF_2 = pd.DataFrame()
-Final_DF_2["Index"] = (Indexcsv2['o']).round().astype(int).map('{:,}'.format).str.rjust(7) + " ( " + (Indexcsv2['o'] - Index_Entry).map('{:+,.2f}'.format) + " )"
+Final_DF_2["Index"] = " ( " + (Indexcsv2['o'] - Index_Entry).map('{:+,.2f}'.format) + " )" + (Indexcsv2['o']).round().astype(int).map('{:,}'.format).str.rjust(7)
 Final_DF_2["Max_profit_column"] = int((Max_profit/100) + 1)*100
 
 fig.add_trace(go.Scatter(x=Final_DF_2.index, y = Final_DF_2["Max_profit_column"], customdata = Final_DF_2["Index"], name = Index_Name, hovertemplate='%{customdata}', legendrank = 2, line=dict(color='red'), line_width=0.5, showlegend = False))
