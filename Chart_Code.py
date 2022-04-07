@@ -47,9 +47,9 @@ if end_time_input == datetime(2021, 11, 4):
 IndexCSV  =  pd.DataFrame(td_obj.get_historic_data(Index_Name, duration='7 D', bar_size='EOD',   end_time = end_time_input))
 Expiry    =  end_time_input
 
-Entry_Date, Exit_Date = ST_Form_2.select_slider("Entry & Exit Date Inputs", options = IndexCSV.time, value = (IndexCSV.time[0], IndexCSV.time[len(IndexCSV.time)-1]), format_func = lambda x: x.date())
+Entry_Date, Exit_Date = ST_Form_1.select_slider("Entry & Exit Date Inputs", options = IndexCSV.time, value = (IndexCSV.time[0], IndexCSV.time[len(IndexCSV.time)-1]), format_func = lambda x: x.date())
 
-Time_Input = ST_Form_2.slider("Entry & Exit Time Inputs", min_value = time(9, 15), max_value = time(15, 30), value = (time(9, 30), time(15, 15)), step = timedelta(minutes = 15))
+Time_Input = ST_Form_1.slider("Entry & Exit Time Inputs", min_value = time(9, 15), max_value = time(15, 30), value = (time(9, 30), time(15, 30)), step = timedelta(minutes = 15))
 
 Entry_Time = timedelta( hours=list(Time_Input)[0].hour, minutes = list(Time_Input)[0].minute )
 Exit_Time  = timedelta( hours=list(Time_Input)[1].hour, minutes = list(Time_Input)[1].minute )
@@ -71,9 +71,9 @@ Smbl_exp  =  str(Expiry.year - 2000) + str(Expiry.month).zfill(2) + str(Expiry.d
 ce_atm = (round(Indexcsv2.o[Entry_Date + Entry_Time]//Index_Dist)-0)*Index_Dist
 pe_atm = (round(Indexcsv2.o[Entry_Date + Entry_Time]//Index_Dist)+1)*Index_Dist
 
-Sell_Dist = ST_Form_2.slider("Sell Distance", min_value = -15, max_value = 40, value = (0, 2))
+Sell_Dist = ST_Form_1.slider("Sell Distance", min_value = -15, max_value = 40, value = (-15, 20))
 
-ST_Form_2.form_submit_button("Submit")
+ST_Form_1.form_submit_button("Submit")
 
 Progress_Strart_time = datetime.now().replace(microsecond=0)
 
