@@ -12,24 +12,21 @@ def Truedata_login(hash_funcs = {TD : id}):
 	td_obj = TD('wssand041', 'sandeep041', live_port=None)
 	return td_obj
 
-ST_Form_1 = st.sidebar.form("St_form_1")
-ST_Form_2 = st.sidebar.form("St_form_2")
-
-Expiry_Date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+td_obj = Truedata_login()
 
 percent_complete = Max_profit = j = k = 0
 
-my_bar = st.progress(0)
+Expiry_Date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
 while Expiry_Date.strftime("%A") != "Thursday":
 	Expiry_Date = Expiry_Date - timedelta(days = 1)
 
-td_obj = Truedata_login()
+ST_Form_1 = st.sidebar.form("St_form_1")
+
+my_bar = st.progress(0)
 
 Index_Name = ST_Form_1.radio("Select Index", ("NIFTY BANK", "NIFTY 50"))
-N = ST_Form_1.slider("Select Expiry Distance", min_value = 0, max_value = 30, value = 0)
-
-ST_Form_1.form_submit_button("Submit")
+N = ST_Form_1.slider("Select Expiry Distance", min_value = 0, max_value = 40, value = 0)
 
 if Index_Name == "NIFTY 50":
 	Symbol_Name, Index_Dist, Lot_Size = "NIFTY", 50, 50
