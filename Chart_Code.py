@@ -4,8 +4,16 @@ from truedata_ws.websocket.TD import TD
 import plotly.graph_objects as go
 import streamlit as st
 import pandas as pd
+import requests
+import pickle
+import io
 
 st.set_page_config(layout="wide")
+
+github_session = requests.Session()
+github_session.auth = ('Zech123as', "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")
+Data = pickle.loads(github_session.get("https://raw.githubusercontent.com/Zech123as/Project-1/main/Test4.pkl").content)
+print(Data)
 
 @st.cache(allow_output_mutation=True)
 def Truedata_login(hash_funcs = {TD : id}):
