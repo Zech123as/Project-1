@@ -27,7 +27,7 @@ percent_complete = Max_profit = j = k = 0
 Expiry_Date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
 while Expiry_Date.strftime("%A") != "Thursday":
-	Expiry_Date = Expiry_Date + timedelta(days = 1)
+	Expiry_Date = Expiry_Date - timedelta(days = 1)
 
 ST_Form_1 = st.sidebar.form("St_form_1")
 ST_Form_2 = st.sidebar.form("St_form_2")
@@ -53,9 +53,8 @@ if end_time_input == datetime(2021, 11, 4):
 	end_time_input = Expiry_Date - timedelta(days = N*7)
 
 IndexCSV  =  pd.DataFrame(td_obj.get_historic_data(Index_Name, duration='7 D', bar_size='EOD',   end_time = end_time_input))
-IndexCSV
 
-Expiry    =  Expiry_Date - timedelta(days = 1)
+Expiry    =  IndexCSV[len(IndexCSV)-1]
 
 st.write(Expiry, Expiry.strftime("%A"))
 
@@ -66,7 +65,7 @@ Time_Input = ST_Form_2.slider("Entry & Exit Time Inputs", min_value = time(9, 15
 Entry_Time = timedelta( hours=list(Time_Input)[0].hour, minutes = list(Time_Input)[0].minute )
 Exit_Time  = timedelta( hours=list(Time_Input)[1].hour, minutes = list(Time_Input)[1].minute )
 
-Indexcsv2 = pd.DataFrame(td_obj.get_historic_data(Index_Name, duration='7 D', bar_size='1 min', end_time=Expiry))
+Indexcsv2 = pd.DataFrame(td_obj.get_historic_data(Index_Name, duration='7 D', bar_size='1 min', end_time=end_time_input))
 Indexcsv2 = Indexcsv2.drop_duplicates(subset = ['time']).set_index('time').reindex(pd.date_range(Entry_Date + Entry_Time, Exit_Date + Exit_Time, freq = '1min')).between_time('09:16','15:30')
 Indexcsv2['c'] = Indexcsv2['c'].ffill().bfill()
 Indexcsv2['o'].fillna(Indexcsv2['c'], inplace=True)
@@ -105,12 +104,12 @@ for i in range((Sell_Dist)[0], (Sell_Dist)[1]+1, 1):
 	
 	ce_sell_dist, pe_sell_dist = i, -1*i
 	
-	ce_sell = pd.DataFrame(td_obj.get_historic_data(Symbol_Name + Smbl_exp + str(ce_atm + ce_sell_dist*Index_Dist) + 'CE', duration='7 D', bar_size='1 min', end_time=Expiry))
+	ce_sell = pd.DataFrame(td_obj.get_historic_data(Symbol_Name + Smbl_exp + str(ce_atm + ce_sell_dist*Index_Dist) + 'CE', duration='7 D', bar_size='1 min', end_time=end_time_input))
 	ce_sell = ce_sell.drop_duplicates(subset = ['time']).set_index('time').reindex(pd.date_range(Entry_Date + Entry_Time, Exit_Date + Exit_Time, freq = '1min')).between_time('09:16','15:30')
 	ce_sell['c'] = ce_sell['c'].ffill().bfill()
 	ce_sell['o'].fillna(ce_sell['c'], inplace=True)
 	
-	pe_sell = pd.DataFrame(td_obj.get_historic_data(Symbol_Name + Smbl_exp + str(pe_atm + pe_sell_dist*Index_Dist) + 'PE', duration='7 D', bar_size='1 min', end_time=Expiry))
+	pe_sell = pd.DataFrame(td_obj.get_historic_data(Symbol_Name + Smbl_exp + str(pe_atm + pe_sell_dist*Index_Dist) + 'PE', duration='7 D', bar_size='1 min', end_time=end_time_input))
 	pe_sell = pe_sell.drop_duplicates(subset = ['time']).set_index('time').reindex(pd.date_range(Entry_Date + Entry_Time, Exit_Date + Exit_Time, freq = '1min')).between_time('09:16','15:30')
 	pe_sell['c'] = pe_sell['c'].ffill().bfill()
 	pe_sell['o'].fillna(pe_sell['c'], inplace=True)
