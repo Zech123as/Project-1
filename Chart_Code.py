@@ -55,6 +55,8 @@ if end_time_input == datetime(2021, 11, 4):
 IndexCSV  =  pd.DataFrame(td_obj.get_historic_data(Index_Name, duration='7 D', bar_size='EOD',   end_time = end_time_input))
 Expiry    =  end_time_input
 
+st.write(Expiry, Expiry.strftime("%A"))
+
 Entry_Date, Exit_Date = ST_Form_2.select_slider("Entry & Exit Date Inputs", options = IndexCSV.time, value = (IndexCSV.time[0], IndexCSV.time[len(IndexCSV.time)-1]), format_func = lambda x: x.date())
 
 Time_Input = ST_Form_2.slider("Entry & Exit Time Inputs", min_value = time(9, 15), max_value = time(15, 30), value = (time(9, 30), time(15, 30)), step = timedelta(minutes = 15))
