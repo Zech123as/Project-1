@@ -27,7 +27,7 @@ percent_complete = Max_profit = j = k = 0
 Expiry_Date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
 while Expiry_Date.strftime("%A") != "Thursday":
-	Expiry_Date = Expiry_Date - timedelta(days = 1)
+	Expiry_Date = Expiry_Date + timedelta(days = 1)
 
 ST_Form_1 = st.sidebar.form("St_form_1")
 ST_Form_2 = st.sidebar.form("St_form_2")
