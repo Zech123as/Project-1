@@ -6,7 +6,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import pickle
-import io
+import os
 
 st.set_page_config(layout="wide")
 
