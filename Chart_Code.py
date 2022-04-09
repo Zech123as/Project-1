@@ -53,6 +53,8 @@ if end_time_input == datetime(2021, 11, 4):
 	end_time_input = Expiry_Date - timedelta(days = N*7)
 
 IndexCSV  =  pd.DataFrame(td_obj.get_historic_data(Index_Name, duration='7 D', bar_size='EOD',   end_time = end_time_input))
+IndexCSV
+
 Expiry    =  IndexCSV[len(IndexCSV)-1]
 
 st.write(Expiry, Expiry.strftime("%A"))
