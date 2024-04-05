@@ -11,7 +11,6 @@ import os
 st.set_page_config(layout="wide")
 
 github_session = requests.Session()
-github_session.auth = ('Zech123as', "sohbKPeGRB8VK+2a4IuY6YVH/YeYVjysAtnXPaTN8YU")
 Data = pickle.loads(github_session.get("https://raw.githubusercontent.com/Zech123as/Project-1/main/Expiry_Dict.pkl").content)
 print(Data)
 
