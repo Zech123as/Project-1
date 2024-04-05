@@ -35,9 +35,3 @@ Navigate to the provided local URL in your browser to interact with the tool.
 
 ## Configuration
 You may need to set up your TrueData and GitHub credentials within the script or as environment variables for data retrieval. Please refer to the respective services for obtaining these credentials.
-
-## Contributing
-Contributions to this project are welcome. Please fork the repository and submit a pull request with your improvements.
-
-## License
-This project is open source and available under the [MIT License](LICENSE.md).
